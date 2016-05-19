@@ -1,22 +1,22 @@
 
 //paramètres
-//container: id du container (element html), format: "string";
-//src: lien vers l'image, format: string
-//leftMargin: coordonnées x de la position de départ (début de la rangée), format: number, default: 0
-//topMargin: coordonnées Y de la position de départ (début de la colonne), format: number, default: 0
-//cols: nombre de colonnes, format: number
-//rows: nombre de rangées, format: number
-//width: largeur du panel en pixels, format: number
-//height: hauteur du panel en pixels, format: number
+//container: id du container (element html), required, format: "string";
+//src: lien vers l'image, required, format: string or array
+//leftMargin: coordonnées x de la position de départ (début de la rangée), optional, format: number, default: 0
+//topMargin: coordonnées Y de la position de départ (début de la colonne), optional, format: number, default: 0
+//cols: nombre de colonnes, required, format: number
+//rows: nombre de rangées, required, format: number
+//width: largeur du panel en pixels, required, format: number
+//height: hauteur du panel en pixels, required, format: number
 //gutterX: largeur de la gouttière verticale en px, format: number, default: 0
 //gutterY: hauteur de la gouttière horizontale en px, format: number, default:0
 //speed: durée de l'intervalle en ms, format: number, défault:50
 //repeat: nombre de répétition, format: number/string, possible value: 'infinite' ou number, défaut: 1
 
-//start: image de début, format: string, possible value : 'first', 'last', 'none', défault: 'first'
-//end: image de début, format: string, possible value : 'first', 'last', 'none', default: 'first'
+//startPanel: image de début, optional, format: string, possible value : 'first', 'last', 'none', défault: 'first'
+//endPanel: image après Stop, optional, format: string, possible value : 'first', 'last', 'none', default: 'last'
+//completePanel: image après fin, optional, format: string, possible value : 'first', 'last', 'none', default: 'last'
 
-//AJOUTER : image de début : true/false + first/last, image de fin : true/false + first/last
 //AJOUTER : événements loop/cycle
 //AJOUTER this.forward (next image); this.backward (previous image)
 	
@@ -29,6 +29,7 @@ function Flip(options)
 	var src;//ok
 	var topMargin;//ok
 	var leftMargin;//ok
+	var x,y;//coordonnées pour canvas (= leftMargin, topMargin)
 	var cols;//ok
 	var rows;//ok
 	var width;//ok
@@ -37,6 +38,9 @@ function Flip(options)
 	var gutterY;//ok
 	var speed;//ok
 	var repeat;//ok
+	var startPanel;
+	var endPanel;
+	var completePanel;
 	//initElement()
 	var element;
 	var canvas;
@@ -74,10 +78,19 @@ function Flip(options)
 			img.src = src[i];
 			imgs.push(img);
 		}
-		//start : première image (mettre conditions : true or false, first panel or last panel)
-		imgs[0].addEventListener('load', function() {
-			ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
-		}, false);
+		//start : première image (mettre conditions : first, last or none)
+		if(startPanel === 'first') {
+			imgs[0].addEventListener('load', function() {
+				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
+			}, false); 
+		} else if(startPanel === 'last') {
+			x = leftMargin+(cols-1)*(width+gutterX);
+			y = topMargin+(rows-1)*(height+gutterY);
+			imagesCounter = imgs.length-1;
+			imgs[imagesCounter].addEventListener('load', function() {
+				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
+			}, false);
+		}
 		
 	}
 	//initLoops()
@@ -115,15 +128,20 @@ function Flip(options)
 	//PUBLIC 
 	//setters/getters
 	this.setContainer = function(option) {
-		if(typeof option === 'string' && option !== '')
-		{
-			container = option;
-			initElement();
+		if(option !== undefined) {
+			if(typeof option === 'string') {
+				if(option !== '') {
+					container = option;
+					initElement();
+				} else {
+					throw new TypeError('Invalid flip() argument. Container must not be empty');
+				}
+			} else {
+				throw new TypeError('Invalid flip() argument. Container must be string');
+			}
+		} else {
+			throw new TypeError('Invalid flip() argument. Container must be defined');
 		}
-		//else
-		//{
-			//throw new TypeError('Invalid flip() argument. Container must be string');
-		//}
 	};
 	
 	this.getContainer = function() {
@@ -131,25 +149,30 @@ function Flip(options)
 	};
 	
 	this.setSrc = function(option) {
-		if(option !== undefined)
-		{
-			if(option.constructor === Array)
-			{
-				src = option;
-				initImage();
+		if(option !== undefined) {
+			if(option.constructor === Array) {
+				if(option.length > 0) {
+					src = option;
+					initImage();
+					initLoops();
+				} else {
+					throw new TypeError('Invalid flip() argument. Src must not be empty');
+				}
+			} else if(typeof option === 'string') {
+				if(option !== '') {
+					src = [];
+					src.push(option);
+					initImage();
+					initLoops();
+				} else {
+					throw new TypeError('Invalid flip() argument. Src must not be empty');
+				}
+			} else {
+				throw new TypeError('Invalid flip() argument. Src must be string or array');
 			}
-			else if(typeof option === 'string' && option !=='')
-			{
-				src = [];
-				src.push(option);
-				initImage();
-			}
-			initLoops();
+		} else {
+			throw new TypeError('Invalid flip() argument. Src must be defined');
 		}
-		//else
-		//{
-			//throw new TypeError('Invalid flip() argument. Src is undefined');
-		//}
 	};
 	
 	this.getSrc = function() {
@@ -160,6 +183,7 @@ function Flip(options)
 		option === undefined|typeof option !== 'number' ?
 			leftMargin = 0 :
 			leftMargin = option;
+		x = leftMargin;
 	};
 	
 	this.getLeftMargin = function() {
@@ -170,6 +194,7 @@ function Flip(options)
 		option === undefined|typeof option !== 'number' ?
 			topMargin = 0 :
 			topMargin = option;
+		y = topMargin;
 	};
 	
 	this.getTopMargin = function() {
@@ -177,11 +202,16 @@ function Flip(options)
 	};
 	
 	this.setCols = function(option) {
-		if(option !== undefined|typeof option === 'number')
-		{
-			cols = option;
-			if(src)
-				initLoops();
+		if(option !== undefined) {
+			if(typeof option === 'number') {
+				cols = option;
+				if(src)
+					initLoops();
+			} else {
+				throw new TypeError('Invalid flip() argument. Cols must be a number');
+			}
+		} else {
+			throw new TypeError('Invalid flip() argument. Cols must be defined');
 		}
 	};
 	
@@ -190,11 +220,16 @@ function Flip(options)
 	};
 	
 	this.setRows = function(option) {
-		if(option !== undefined|typeof option === 'number')
-		{
-			rows = option;
-			if(src)
-				initLoops();
+		if(option !== undefined) {
+			if(typeof option === 'number') {
+				rows = option;
+				if(src)
+					initLoops();
+			} else {
+				throw new TypeError('Invalid flip() argument. Rows must be a number');
+			}
+		} else {
+			throw new TypeError('Invalid flip() argument. Rows must be defined');
 		}
 	};
 	
@@ -203,11 +238,16 @@ function Flip(options)
 	};
 	
 	this.setWidth = function(option) {
-		if(option !== undefined|typeof option === 'number')
-		{
-			width = option;
-			if(element)
-				initElement();
+		if(option !== undefined) {
+			if(typeof option === 'number') {
+				width = option;
+				if(element)
+					initElement();
+			} else {
+				throw new TypeError('Invalid flip() argument. Width must be a number');
+			}
+		} else {
+			throw new TypeError('Invalid flip() argument. Width must be defined');
 		}
 	};
 	
@@ -216,11 +256,16 @@ function Flip(options)
 	};
 	
 	this.setHeight = function(option) {
-		if(option !== undefined|typeof option === 'number')
-		{
-			height = option;
-			if(element)
-				initElement();
+		if(option !== undefined|typeof option === 'number') {
+			if(typeof option === 'number') {
+				height = option;
+				if(element)
+					initElement();
+			} else {
+				throw new TypeError('Invalid flip() argument. Height must be a number');
+			}
+		} else {
+			throw new TypeError('Invalid flip() argument. Height must be defined');
 		}
 		
 	};
@@ -260,17 +305,11 @@ function Flip(options)
 	};
 	
 	this.setRepeat = function(option) {
-		if(option === 'infinite')
-		{
+		if(option === 'infinite') {
 			repeat = null;
-		}
-		else if(option === undefined|typeof option !== 'number')
-		{
+		} else if(option === undefined|typeof option !== 'number') {
 			repeat = 1;
-				
-		}
-		else
-		{
+		} else {
 			repeat = option;
 		}
 		if(src)
@@ -279,6 +318,48 @@ function Flip(options)
 	
 	this.getRepeat = function() {
 		return repeat;
+	};
+	
+	this.setStartPanel = function(option) {
+		option === undefined|typeof option !== 'string'|option === '' ?
+			startPanel = 'first' :
+			startPanel = option;
+	};
+	
+	this.getStartPanel = function() {
+		return startPanel;
+	};
+	
+	this.setEndPanel = function(option) {
+		option === undefined|typeof option !== 'string'|option === '' ?
+			endPanel = 'last' :
+			endPanel = option;
+	};
+	
+	this.getEndPanel = function() {
+		return endPanel;
+	};
+	
+	this.setCompletePanel = function(option) {
+		option === undefined|typeof option !== 'string'|option === '' ?
+			completePanel = 'last' :
+			completePanel = option;
+	};
+	
+	this.getCompletePanel = function() {
+		return completePanel;
+	};
+	
+	this.setSrcOptions = function(options) {
+		this.setTopMargin(options.topMargin);
+		this.setLeftMargin(options.leftMargin);
+		this.setCols(options.cols);//includes initLoops()
+		this.setRows(options.rows);//includes initLoops()
+		this.setWidth(options.width);//includes initElement();
+		this.setHeight(options.height);//includes initElement();
+		this.setGutterX(options.gutterX);
+		this.setGutterY(options.gutterY);
+		this.setSrc(options.src);//includes initImage() and initLoops();
 	};
 	
 	
@@ -295,6 +376,9 @@ function Flip(options)
 	this.setGutterY(options.gutterY);
 	this.setSpeed(options.speed);
 	this.setRepeat(options.repeat);//includes initLoops()
+	this.setStartPanel(options.startPanel);
+	this.setEndPanel(options.endPanel);
+	this.setCompletePanel(options.completePanel);
 	//then
 	this.setSrc(options.src);//includes initImage() and initLoops();
 	this.setContainer(options.container);//includes initElement();
@@ -303,8 +387,6 @@ function Flip(options)
 	//Moteur()
 
 	var interval;
-	var x = leftMargin;
-	var y = topMargin;
 	var counter = 0;
 	var cycleCounter = 0;
 	var panelsCounter = 0;
@@ -324,11 +406,19 @@ function Flip(options)
 		
 		if(counter == loops)//end animation
 		{
-			//element.style.visibility="hidden";
 			clearInterval(interval);
 			inprog = null;
 			element.dispatchEvent(completeEvent);
 			document.dispatchEvent(completeEvent);
+			if(completePanel === 'first') {
+				x = leftMargin;
+				y = topMargin;
+				imagesCounter = 0;
+				img = imgs[imagesCounter];
+				setTimeout(function() {ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);},speed);
+			} else if(completePanel === 'none') {
+				setTimeout(function(){element.style.visibility="hidden"},speed);
+			}
 			return
 		}
 		
@@ -374,11 +464,11 @@ function Flip(options)
 	var inprog = null;
 	
 	this.start = function() {
-		//element.style.visibility = "visible";
+		
+		x = leftMargin;
+		y = topMargin;
 		if(interval!==undefined){//if interval defined, re-init variables for moteur()
 			clearInterval(interval);
-			x = leftMargin;
-			y = topMargin;
 			counter=0;
 			cycleCounter=0;
 			panelsCounter=0;
@@ -387,6 +477,7 @@ function Flip(options)
 			refreshEvent();
 		}
 		interval = setInterval(function(){moteur(interval);},speed);
+		setTimeout(function(){element.style.visibility="visible"},speed);
 		inprog = true;
 		element.dispatchEvent(startEvent);
 		document.dispatchEvent(startEvent);
@@ -417,20 +508,27 @@ function Flip(options)
 	this.stop = function() {
 		if(interval!=null && inprog!=null)
 		{
-			//mettre conditions : true or false (visibility: hidden or visible) ; first or last)
-			clearInterval(interval);
-			x = leftMargin+(cols-1)*(width+gutterX);
-			y = topMargin+(rows-1)*(height+gutterY);
-			counter = loops-1;
-			panelsCounter = panelNumber-1;
-			cycleCounter = totalNumber-1;
-			imagesCounter = imgs.length-1;
-			img = imgs[imagesCounter];
 			refreshEvent();
-			ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
+			clearInterval(interval);
 			inprog = null;
 			element.dispatchEvent(stopEvent);
 			document.dispatchEvent(stopEvent);
+			if(endPanel === 'last') {
+				x = leftMargin+(cols-1)*(width+gutterX);
+				y = topMargin+(rows-1)*(height+gutterY);
+				imagesCounter = imgs.length-1;
+				img = imgs[imagesCounter];
+				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
+			} else if(endPanel === 'first') {
+				x = leftMargin;
+				y = topMargin;
+				imagesCounter = 0;
+				img = imgs[imagesCounter];
+				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
+			} else if(endPanel === 'none') {
+				element.style.visibility="hidden";
+			}
+			
 		}
 	}
 }
