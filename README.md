@@ -6,7 +6,7 @@ Make a cartoon with JavaScript and Canvas
 
 		<script src="flip-book.js"></script>
 	
-* Insert your image(s) in your images repertory (see requirements for image files)
+* Insert your image(s) in your images repertory (see below "Requirements for image files")
 
 * In your js file, create your flip instance and start :
 
