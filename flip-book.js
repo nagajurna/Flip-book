@@ -39,7 +39,7 @@ function Flip(options)
 	var speed;//ok
 	var repeat;//ok
 	var startPanel;
-	var endPanel;
+	var stopPanel;
 	var completePanel;
 	//initElement()
 	var element;
@@ -118,11 +118,11 @@ function Flip(options)
 		resumeEvent.detail.src = src[imagesCounter];
 		stopEvent.detail.src = src[imagesCounter];
 		
-		completeEvent.detail.panelId = counter+1;
-		startEvent.detail.panelId = counter+1;
-		pauseEvent.detail.panelId = counter+1;
-		resumeEvent.detail.panelId = counter+2;
-		stopEvent.detail.panelId = counter+1;
+		completeEvent.detail.index = counter+1;
+		startEvent.detail.index = counter+1;
+		pauseEvent.detail.index = counter+1;
+		resumeEvent.detail.index = counter+2;
+		stopEvent.detail.index = counter+1;
 	}
 	
 	//PUBLIC 
@@ -330,14 +330,14 @@ function Flip(options)
 		return startPanel;
 	};
 	
-	this.setEndPanel = function(option) {
+	this.setStopPanel = function(option) {
 		option === undefined|typeof option !== 'string'|option === '' ?
-			endPanel = 'last' :
-			endPanel = option;
+			stopPanel = 'last' :
+			stopPanel = option;
 	};
 	
-	this.getEndPanel = function() {
-		return endPanel;
+	this.getStopPanel = function() {
+		return stopPanel;
 	};
 	
 	this.setCompletePanel = function(option) {
@@ -377,7 +377,7 @@ function Flip(options)
 	this.setSpeed(options.speed);
 	this.setRepeat(options.repeat);//includes initLoops()
 	this.setStartPanel(options.startPanel);
-	this.setEndPanel(options.endPanel);
+	this.setStopPanel(options.stopPanel);
 	this.setCompletePanel(options.completePanel);
 	//then
 	this.setSrc(options.src);//includes initImage() and initLoops();
@@ -513,19 +513,19 @@ function Flip(options)
 			inprog = null;
 			element.dispatchEvent(stopEvent);
 			document.dispatchEvent(stopEvent);
-			if(endPanel === 'last') {
+			if(stopPanel === 'last') {
 				x = leftMargin+(cols-1)*(width+gutterX);
 				y = topMargin+(rows-1)*(height+gutterY);
 				imagesCounter = imgs.length-1;
 				img = imgs[imagesCounter];
 				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
-			} else if(endPanel === 'first') {
+			} else if(stopPanel === 'first') {
 				x = leftMargin;
 				y = topMargin;
 				imagesCounter = 0;
 				img = imgs[imagesCounter];
 				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
-			} else if(endPanel === 'none') {
+			} else if(stopPanel === 'none') {
 				element.style.visibility="hidden";
 			}
 			
