@@ -6,11 +6,11 @@ Make a cartoon with JavaScript and Canvas
 
 		<script src="flip-book.js"></script>
 		
-* Insert a div in your HTML
+* Insert a div in your HTML :
 
 		<div id='my_div'></div>
 	
-* Insert your image(s) in your images repertory (see below "Requirements for image files")
+* Insert your image(s) in your images repertory (see below, "Requirements for image files")
 
 * In your js script, create your flip instance and start :
 
@@ -34,12 +34,12 @@ Make a cartoon with JavaScript and Canvas
 ## Options (Object)
 
 <table>
-	<th>
-		<td>Parameter</td>
-		<td>Description</td>
-		<td>Format</td>
-		<td>Required/optional</td>
-	</th>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+		<th>Format</th>
+		<th>Required/optional</th>
+	</tr>
 	<tr>
 		<td>container</td>
 		<td>id of the HTML container (div)</td>
