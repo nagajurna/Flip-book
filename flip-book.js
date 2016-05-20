@@ -1,46 +1,29 @@
-
-//paramètres
-//container: id du container (element html), required, format: "string";
-//src: lien vers l'image, required, format: string or array
-//leftMargin: coordonnées x de la position de départ (début de la rangée), optional, format: number, default: 0
-//topMargin: coordonnées Y de la position de départ (début de la colonne), optional, format: number, default: 0
-//cols: nombre de colonnes, required, format: number
-//rows: nombre de rangées, required, format: number
-//width: largeur du panel en pixels, required, format: number
-//height: hauteur du panel en pixels, required, format: number
-//gutterX: largeur de la gouttière verticale en px, format: number, default: 0
-//gutterY: hauteur de la gouttière horizontale en px, format: number, default:0
-//speed: durée de l'intervalle en ms, format: number, défault:50
-//repeat: nombre de répétition, format: number/string, possible value: 'infinite' ou number, défaut: 1
-
-//startPanel: image de début, optional, format: string, possible value : 'first', 'last', 'none', défault: 'first'
-//endPanel: image après Stop, optional, format: string, possible value : 'first', 'last', 'none', default: 'last'
-//completePanel: image après fin, optional, format: string, possible value : 'first', 'last', 'none', default: 'last'
-
-//AJOUTER : événements loop/cycle
-//AJOUTER this.forward (next image); this.backward (previous image)
+//Flip-book by Nagajurna (ppruneta)
+//I chose to make all properties private and consequently not to use prototype
+//May be not have been the best choice...
 	
 function Flip(options)
 {
-	
 	//PRIVATE
 	//options	
-	var container;//ok
-	var src;//ok
-	var topMargin;//ok
-	var leftMargin;//ok
-	var x,y;//coordonnées pour canvas (= leftMargin, topMargin)
-	var cols;//ok
-	var rows;//ok
-	var width;//ok
-	var height;//ok
-	var gutterX;//ok
-	var gutterY;//ok
-	var speed;//ok
-	var repeat;//ok
+	var container;
+	var src;
+	var topMargin;
+	var leftMargin;
+	var cols;
+	var rows;
+	var width;
+	var height;
+	var gutterX;
+	var gutterY;
+	var speed;
+	var repeat;
 	var startPanel;
 	var stopPanel;
 	var completePanel;
+	
+	var x,y;//coordinates for canvas (= leftMargin, topMargin)
+	
 	//initElement()
 	var element;
 	var canvas;
@@ -48,7 +31,7 @@ function Flip(options)
 	var ctx;
 	var initElement = function() {
 		element = document.getElementById(container);
-		var c = element.children;
+		var c = element.children;//if already canvas, use it, else create one
 		var found = false;
 		for(i=0; i<c.length; i++)
 		{
@@ -57,9 +40,9 @@ function Flip(options)
 			break;
 		}
 		if(found===false) { canvas = document.createElement("canvas");element.appendChild(canvas)}
-		canvas.style.width= "100%";//largeur = 100% de la section
-		ratio = height/width;//ratio hauteur/largeur du fragment
-		canvas.height = ratio*canvas.width;//calcul de la hauteur du canvas
+		canvas.style.width= "100%";//width = 100% of container
+		ratio = height/width;//ratio height/width of panels
+		canvas.height = ratio*canvas.width;//calculation of canvas height
 		ctx = canvas.getContext("2d");
 		//refresh event.detail.container
 		completeEvent.detail.container = container;
@@ -78,7 +61,7 @@ function Flip(options)
 			img.src = src[i];
 			imgs.push(img);
 		}
-		//start : première image (mettre conditions : first, last or none)
+		
 		if(startPanel === 'first') {
 			imgs[0].addEventListener('load', function() {
 				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
@@ -91,14 +74,13 @@ function Flip(options)
 				ctx.drawImage(img,x,y,width,height,0,0,canvas.width,canvas.height);
 			}, false);
 		}
-		
 	}
 	//initLoops()
 	var panelNumber;//panel per page
 	var totalNumber;//panel per cycle
 	var loops;//total number*repeat
 	var initLoops = function() {
-		//if repeat === null (infinite), loops = 0;
+		//if repeat === null ('infinite'), loops = 0;
 		panelNumber = cols*rows;
 		totalNumber = panelNumber*src.length;
 		loops = totalNumber*repeat;
@@ -267,7 +249,6 @@ function Flip(options)
 		} else {
 			throw new TypeError('Invalid flip() argument. Height must be defined');
 		}
-		
 	};
 	
 	this.getHeight = function() {
@@ -362,12 +343,10 @@ function Flip(options)
 		this.setSrc(options.src);//includes initImage() and initLoops();
 	};
 	
-	
-	
 	//INIT
 	//first options
-	this.setTopMargin(options.topMargin);
-	this.setLeftMargin(options.leftMargin);
+	this.setTopMargin(options.topMargin);//initiate y
+	this.setLeftMargin(options.leftMargin);//initiale x
 	this.setCols(options.cols);//includes initLoops()
 	this.setRows(options.rows);//includes initLoops()
 	this.setWidth(options.width);//includes initElement();
@@ -385,7 +364,6 @@ function Flip(options)
 		
 	//PRIVATE
 	//Moteur()
-
 	var interval;
 	var counter = 0;
 	var cycleCounter = 0;
@@ -460,7 +438,7 @@ function Flip(options)
 	
 
 	//PUBLIC FUNCTIONS
-	//VARIABLE POUR FONCTIONS START, PAUSE, RESUME, STOP
+	//variable for methods START, PAUSE, RESUME, STOP
 	var inprog = null;
 	
 	this.start = function() {
@@ -502,7 +480,6 @@ function Flip(options)
 			element.dispatchEvent(resumeEvent);
 			document.dispatchEvent(resumeEvent);
 		}
-			
 	}
 	
 	this.stop = function() {
@@ -528,7 +505,6 @@ function Flip(options)
 			} else if(stopPanel === 'none') {
 				element.style.visibility="hidden";
 			}
-			
 		}
 	}
 }

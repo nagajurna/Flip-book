@@ -2,20 +2,44 @@
 Make a cartoon with JavaScript and Canvas
 
 ## Use
-* Reference the file in your HTML :
+* Reference the flip-book.js file :
 
 		<script src="flip-book.js"></script>
+		
+* Insert a div in your HTML
+
+		<div id='my_div'></div>
 	
 * Insert your image(s) in your images repertory (see below "Requirements for image files")
 
-* In your js file, create your flip instance and start :
+* In your js script, create your flip instance and start :
 
-		var flip = new Flip(options);
-		flip.start();
+		var params = {container: 'my_div',
+					  src: ['images/image_1.jpg','images/image_2.jpg','images/image_3.jpg'],
+					  cols: 10,
+				      rows: 18,
+				      width: 36,
+				      height: 48,
+				      leftMargin: 29,
+				      topMargin: 20,
+				      gutterX: 3,
+				      gutterY: 8,
+				      repeat: 2,
+				      speed: 100};
+		var flip = new Flip(params);
+		window.onload = function() {
+			flip.start();
+		}
 		
 ## Options (Object)
 
 <table>
+	<th>
+		<td>Parameter</td>
+		<td>Description</td>
+		<td>Format</td>
+		<td>Required/optional</td>
+	</th>
 	<tr>
 		<td>container</td>
 		<td>id of the HTML container (div)</td>
@@ -24,19 +48,19 @@ Make a cartoon with JavaScript and Canvas
 	</tr>
 	<tr>
 		<td>src</td>
-		<td>link(s) to your image files</td>
+		<td>link(s) to your image file(s)</td>
 		<td>string (single file) or array of string (several files)</td>
 		<td>required</td>
 	</tr>
 	<tr>
 		<td>cols</td>
-		<td>number of columns of your image files (= number of panels per row)</td>
+		<td>number of columns of your image file(s) (= number of panels per row)</td>
 		<td>number</td>
 		<td>required</td>
 	</tr>
 	<tr>
 		<td>rows</td>
-		<td>number of rows of your image files (= number of panels per columns)</td>
+		<td>number of rows of your image file(s) (= number of panels per columns)</td>
 		<td>number</td>
 		<td>required</td>
 	</tr>
@@ -54,13 +78,13 @@ Make a cartoon with JavaScript and Canvas
 	</tr>
 	<tr>
 		<td>leftMargin</td>
-		<td>width of the left margin of your image files (= distance, in pixels, from the left edge to the first column)</td>
+		<td>width of the left margin of your image file(s) (= distance, in pixels, from the left edge to the first column)</td>
 		<td>number</td>
 		<td>optional (default: 0)</td>
 	</tr>
 	<tr>
 		<td>topMargin</td>
-		<td>height of the top margin of your image files (= distance, in pixels, from the top edge to the first row)</td>
+		<td>height of the top margin of your image file(s) (= distance, in pixels, from the top edge to the first row)</td>
 		<td>number</td>
 		<td>optional (default: 0)</td>
 	</tr>
@@ -108,3 +132,4 @@ Make a cartoon with JavaScript and Canvas
 	</tr>
 </table>
 
+## Methods
