@@ -40,7 +40,7 @@ Make a cartoon with JavaScript and Canvas
 		* Sets parameters for the animation.
 		</td>
 	</tr>
-</table
+</table>
 
 ## Options (Object)
 
