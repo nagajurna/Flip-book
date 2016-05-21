@@ -34,11 +34,7 @@ Make a cartoon with JavaScript and Canvas
 <table>
 	<tr>
 		<td>Flip(options)</td>
-		<td>
-		* Creates a CANVAS element inside the HTML element defined by 'container' (preferably a DIV) ;
-		* Binds the image files defined by 'src' to the CANVAS element ;
-		* Sets parameters for the animation.
-		</td>
+		<td><ul><li>Creates a CANVAS element inside the HTML element defined by 'container' (preferably a DIV) ;</li><li>Binds the image files defined by 'src' to the CANVAS element ;</li><li>Sets parameters for the animation.</li></ul></td>
 	</tr>
 </table>
 
