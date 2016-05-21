@@ -14,7 +14,7 @@ Make a cartoon with JavaScript and Canvas
 
 * In your js script, create your flip instance and start :
 
-		var params = {container: 'my_div',
+		var options = {container: 'my_div',
 					  src: ['images/image_1.jpg','images/image_2.jpg','images/image_3.jpg'],
 					  cols: 10,
 				      rows: 18,
@@ -26,11 +26,22 @@ Make a cartoon with JavaScript and Canvas
 				      gutterY: 8,
 				      repeat: 2,
 				      speed: 100};
-		var flip = new Flip(params);
-		window.onload = function() {
-			flip.start();
-		}
+		var flip = new Flip(options);
+		window.addEventListener('load', flip.start, false)
 		
+## Constructor
+
+<table>
+	<tr>
+		<td>Flip(options)</td>
+		<td>
+		* Creates a CANVAS element inside the HTML element defined by 'container' (preferably a DIV) ;
+		* Binds the image files defined by 'src' to the CANVAS element ;
+		* Sets parameters for the animation.
+		</td>
+	</tr>
+</table
+
 ## Options (Object)
 
 <table>
@@ -38,7 +49,7 @@ Make a cartoon with JavaScript and Canvas
 		<th>Parameter</th>
 		<th>Description</th>
 		<th>Format</th>
-		<th>Required/optional</th>
+		<th>Status</th>
 	</tr>
 	<tr>
 		<td>container</td>
@@ -49,18 +60,18 @@ Make a cartoon with JavaScript and Canvas
 	<tr>
 		<td>src</td>
 		<td>link(s) to your image file(s)</td>
-		<td>string (single file) or array of string (several files)</td>
+		<td>string (single file) or array of strings (several files)</td>
 		<td>required</td>
 	</tr>
 	<tr>
 		<td>cols</td>
-		<td>number of columns of your image file(s) (= number of panels per row)</td>
+		<td>number of columns of your image file(s)  (= number of panels per row)</td>
 		<td>number</td>
 		<td>required</td>
 	</tr>
 	<tr>
 		<td>rows</td>
-		<td>number of rows of your image file(s) (= number of panels per columns)</td>
+		<td>number of rows of your image file(s)  (= number of panels per columns)</td>
 		<td>number</td>
 		<td>required</td>
 	</tr>
@@ -78,13 +89,13 @@ Make a cartoon with JavaScript and Canvas
 	</tr>
 	<tr>
 		<td>leftMargin</td>
-		<td>width of the left margin of your image file(s) (= distance, in pixels, from the left edge to the first column)</td>
+		<td>width of the left margin of your image file(s)  (= distance, in pixels, from the left edge to the first column)</td>
 		<td>number</td>
 		<td>optional (default: 0)</td>
 	</tr>
 	<tr>
 		<td>topMargin</td>
-		<td>height of the top margin of your image file(s) (= distance, in pixels, from the top edge to the first row)</td>
+		<td>height of the top margin of your image file(s)  (= distance, in pixels, from the top edge to the first row)</td>
 		<td>number</td>
 		<td>optional (default: 0)</td>
 	</tr>
@@ -133,3 +144,5 @@ Make a cartoon with JavaScript and Canvas
 </table>
 
 ## Methods
+
+## Requirements for image files
