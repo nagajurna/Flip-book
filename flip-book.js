@@ -1,6 +1,6 @@
 //Flip-book by Nagajurna (ppruneta)
 //I chose to make all properties private and consequently not to use prototype
-//May be not have been the best choice...
+//May not have been the best choice...
 	
 function Flip(options)
 {
