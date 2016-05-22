@@ -1,0 +1,27 @@
+{
+  "name": "Flip-book",
+  "version": "1.0.0",
+  "description": "Make cartoons with JavaScript",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nagajurna/Flip-book"
+  },
+  "keywords": [
+    "canvas",
+    "javascript",
+    "animation"
+  ],
+  "author": "nagajurna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nagajurna/Flip-book/issues"
+  },
+  "homepage": "https://github.com/nagajurna/Flip-book",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1"
+  }
+}
