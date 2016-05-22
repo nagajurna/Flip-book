@@ -114,141 +114,187 @@
 
 <table>
 	<tr>
-		<td>start()</td>
+		<th>start()</th>
 		<td>Starts animation</td>
 	</tr>
 	<tr>
-		<td>pause()</td>
+		<th>pause()</th>
 		<td>Temporarily stops animation</td>
 	<tr>
-		<td>resume()</td>
+		<th>resume()</th>
 		<td>Resumes animation after pause</td>
 	</tr>
 	<tr>
-		<td>stop()</td>
+		<th>stop()</th>
 		<td>Stops the animation</td>
 	</tr>
 	<tr>
-		<td>setContainer(param)</td>
-		<td>Sets container (param = string, no return value)</td>
+		<th colspan="2"> Setters/getters</th>
 	</tr>
 	<tr>
-		<td>getContainer()</td>
+		<th>setContainer(value)</th>
+		<td>Sets container (value = string)</td>
+	</tr>
+	<tr>
+		<th>getContainer()</th>
 		<td>Returns the current value of container (string)</td>
 	</tr>
 	<tr>
-		<td>setSrc(param)</td>
-		<td>Sets src (param = string for a single file or array of strings for several files, no return value)</td>
+		<th>setSrc(value)</th>
+		<td>Sets src (value = string for a single file or array of strings for several files)</td>
 	</tr>
 	<tr>
-		<td>getSrc()</td>
+		<th>getSrc()</th>
 		<td>Returns the current value of src (string or array of strings)</td>
 	</tr>
 	<tr>
-		<td>setCols(param)</td>
-		<td>Sets cols (param = number, no return value)</td>
+		<th>setCols(value)</th>
+		<td>Sets cols (value = number)</td>
 	</tr>
 	<tr>
-		<td>getCols()</td>
+		<th>getCols()</th>
 		<td>Returns the current value of cols (number)</td>
 	</tr>
 	<tr>
-		<td>setRows(param)</td>
-		<td>Sets rows (param = number, no return value)</td>
+		<th>setRows(value)</th>
+		<td>Sets rows (value = number)</td>
 	</tr>
 	<tr>
-		<td>getRows()</td>
+		<th>getRows()</th>
 		<td>Returns the current value of rows (number)</td>
 	</tr>
 	<tr>
-		<td>setWidth(param)</td>
-		<td>Sets width (param = number, no return value)</td>
+		<th>setWidth(value)</th>
+		<td>Sets width (value = number)</td>
 	</tr>
 	<tr>
-		<td>getWidth()</td>
+		<th>getWidth()</th>
 		<td>Returns the current value of width (number)</td>
 	</tr>
 	<tr>
-		<td>setHeight(param)</td>
-		<td>Sets height (param = number, no return value)</td>
+		<th>setHeight(value)</th>
+		<td>Sets height (value = number)</td>
 	</tr>
 	<tr>
-		<td>getHeight()</td>
+		<th>getHeight()</th>
 		<td>Returns the current value of height (number)</td>
 	</tr>
 	<tr>
-		<td>setLeftMargin(param)</td>
-		<td>Sets leftMargin (param = number, no return value)</td>
+		<th>setLeftMargin(value)</th>
+		<td>Sets leftMargin (value = number)</td>
 	</tr>
 	<tr>
-		<td>getLeftMargin()</td>
+		<th>getLeftMargin()</th>
 		<td>Returns the current value of leftMargin (number)</td>
 	</tr>
 	<tr>
-		<td>setTopMargin(param)</td>
-		<td>Sets topMargin (param = number, no return value)</td>
+		<th>setTopMargin(value)</th>
+		<td>Sets topMargin (value = number)</td>
 	</tr>
 	<tr>
-		<td>getTopMargin()</td>
+		<th>getTopMargin()</th>
 		<td>Returns the current value of topMargin (value)</td>
 	</tr>
 	<tr>
-		<td>setGutterX(param)</td>
-		<td>Sets gutterX (param = number, no return value)</td>
+		<th>setGutterX(value)</th>
+		<td>Sets gutterX (value = number)</td>
 	</tr>
 	<tr>
-		<td>getGutterX()</td>
+		<th>getGutterX()</th>
 		<td>Returns the current value of gutterX (number)</td>
 	</tr>
 	<tr>
-		<td>setGutterY(param)</td>
-		<td>Sets gutterY (param = number, no return value)</td>
+		<th>setGutterY(value)</th>
+		<td>Sets gutterY (value = number)</td>
 	</tr>
 	<tr>
-		<td>getGutterY()</td>
+		<th>getGutterY()</th>
 		<td>Returns the current value of gutterY (number)</td>
 	</tr>
 	<tr>
-		<td>setSpeed(param)</td>
-		<td>Sets speed (param = number, no return value)</td>
+		<th>setSpeed(value)</th>
+		<td>Sets speed (value = number)</td>
 	</tr>
 	<tr>
-		<td>getSpeed()</td>
+		<th>getSpeed()</th>
 		<td>Returns the current value of speed (number)</td>
 	</tr>
 	<tr>
-		<td>setRepeat(param)</td>
-		<td>Sets repeat (param = number, no return value)</td>
+		<th>setRepeat(value)</th>
+		<td>Sets repeat (value = number or 'infinite')</td>
 	</tr>
 	<tr>
-		<td>getRepeat()</td>
-		<td>Returns the current value of repeat (number)</td>
+		<th>getRepeat()</th>
+		<td>Returns the current value of repeat (number or 'infinite')</td>
 	</tr>
 	<tr>
-		<td>setStartPanel(param)</td>
-		<td>Sets startPanel (param = 'first', 'last' or 'none', no return value)</td>
+		<th>setStartPanel(value)</th>
+		<td>Sets startPanel (value = 'first', 'last' or 'none')</td>
 	</tr>
 	<tr>
-		<td>getStartPanel()</td>
+		<th>getStartPanel()</th>
 		<td>Returns the current value of startPanel (string)</td>
 	<tr>
-		<td>setCompletePanel(param)</td>
-		<td>Sets completePanel (param = 'first', 'last' or 'none', no return value)</td>
+		<th>setCompletePanel(value)</th>
+		<td>Sets completePanel (value = 'first', 'last' or 'none')</td>
 	</tr>
 	<tr>
-		<td>getCompletePanel()</td>
+		<th>getCompletePanel()</th>
 		<td>Returns the current value of completePanel (string)</td>
 	</tr>
 	<tr>
-		<td>setStopPanel(param)</td>
-		<td>Sets stopPanel (param = 'first, 'last' or 'none', no return value)</td>
+		<th>setStopPanel(value)</td>
+		<td>Sets stopPanel (value = 'first, 'last' or 'none')</td>
 	</tr>
 	<tr>
-		<td>getStopPanel()</td>
+		<th>getStopPanel()</th>
 		<td>Returns the current value of stopPanel</td>
 	</tr>
 </table>
 
 ## Events
+
+Events are dispatched to :
+
+* document ;
+* container element.
+
+<table>
+	<tr>
+		<th>start</th>
+		<td>Event is fired when animation starts</td>
+	</tr>
+	<tr>
+		<th>pause</th>
+		<td>Event is fired when animation pauses</td>
+	<tr>
+		<th>resume</th>
+		<td>Event is fired when animation resumes</td>
+	</tr>
+	<tr>
+		<th>stop</th>
+		<td>Event is fired when animation stops</td>
+	</tr>
+	<tr>
+		<th>complete</th>
+		<td>Event is fired when animation comes to its end</td>
+	</tr>
+</table>
+
+Events details : 
+
+<table>
+	<tr>
+		<td>event.detail.container</td>
+		<td>id of container element (string)</td>
+	</tr>
+	<tr>
+		<th>event.detail.container</th>
+		<td>link to image file (string)</td>
+	<tr>
+		<th>event.detail.index</td>
+		<td>panel index (number, starts at 1)</td>
+	</tr>
+</table>
 
 ## Requirements for image files
