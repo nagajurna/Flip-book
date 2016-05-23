@@ -4,7 +4,7 @@ Make a cartoon with JavaScript and Canvas
 ## Use
 * Reference the flip-book.js file :
 
-		<script src="flip-book.js"></script>
+		<script src="flip-book.min.js"></script>
 		
 * Insert a div in your HTML :
 
@@ -16,14 +16,14 @@ Make a cartoon with JavaScript and Canvas
 
 		var options = {container: 'my_div',
 					  src: ['images/image_1.jpg','images/image_2.jpg','images/image_3.jpg'],
-					  cols: 10,
-				      rows: 18,
-				      width: 36,
-				      height: 48,
-				      leftMargin: 29,
-				      topMargin: 20,
-				      gutterX: 3,
-				      gutterY: 8,
+					  cols: 6,
+				      rows: 8,
+				      width: 100,
+				      height: 110,
+				      leftMargin: 20,
+				      topMargin: 22,
+				      gutterX: 10,
+				      gutterY: 20,
 				      repeat: 2,
 				      speed: 100};
 		var flip = new Flip(options);
