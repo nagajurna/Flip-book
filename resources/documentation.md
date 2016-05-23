@@ -82,7 +82,7 @@
 		<td>speed</td>
 		<td>interval in ms</td>
 		<td>number</td>
-		<td>optional (default: 50)</td>
+		<td>optional (default: 100)</td>
 	</tr>
 	<tr>
 		<td>repeat</td>
