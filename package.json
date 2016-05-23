@@ -2,6 +2,7 @@
   "name": "Flip-book",
   "version": "1.0.0",
   "description": "Make cartoons with JavaScript and Canvas",
+  "main": "dist/flip-book.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
