@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Flip-book - exemple 1</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<style>
+			body {background-color : #000;}
+			#container, img, #buttons {width: 75%;margin: auto;margin-bottom: 15px;}
+			h1, h3 {color: #eee;}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="page-header">
+			  <h1>Flip-book</h1>
+			  <h3>E. Mubridge&nbsp;&ndash; Galloping horse</h3>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 text-center">
+					<img src="images/muybridge_horse.jpeg" alt="muybridge_horse">
+				</div>
+				<div class="col-sm-6">
+					<div id="container"></div>
+					<div id="buttons" class="text-center">
+						<div class="btn-group">
+							<button id="start" type="button" class="btn btn-default btn-sm" >Start</button>
+							<button id="pause" type="button" class="btn btn-default btn-sm" >Pause</button> 
+							<button id="resume" type="button" class="btn btn-default btn-sm" >Resume</button>
+							<button id="stop" type="button" class="btn btn-default btn-sm" >Stop</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		  	  
+	<script src="../dist/flip-book.min.js"></script>
+	<script src="js/example_1.js"></script>
+	
+	</body>
+</html>
