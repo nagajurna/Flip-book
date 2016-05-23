@@ -4,9 +4,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		uglify: {
-			options: {
-			  mangle: false
-			},
 			my_target: {
 				files: {
 					'dist/flip-book.min.js': ['dist/flip-book.js']
