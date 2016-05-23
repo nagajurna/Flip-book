@@ -26,7 +26,7 @@
 	</tr>
 	<tr>
 		<td>src</td>
-		<td>link(s) to your image file(s)</td>
+		<td>url(s) to your image file(s)</td>
 		<td>string (single file) or array of strings (several files)</td>
 		<td>required</td>
 	</tr>
@@ -285,12 +285,12 @@ Events details :
 
 <table>
 	<tr>
-		<td>event.detail.container</td>
+		<th>event.detail.container</th>
 		<td>id of container element (string)</td>
 	</tr>
 	<tr>
-		<th>event.detail.container</th>
-		<td>link to image file (string)</td>
+		<th>event.detail.src</th>
+		<td>image file url (string)</td>
 	<tr>
 		<th>event.detail.index</td>
 		<td>panel index (number, starts at 1)</td>
@@ -298,3 +298,11 @@ Events details :
 </table>
 
 ## Requirements for image files
+
+* File format : jpeg, jpg, png...
+
+* A single animation may use one or several image files
+
+* If a animation uses several images files, then cols, rows, width, height, leftMargin, topMargin, gutterX and gutterY must be the same for all images files
+
+* All rows must have the same number of columns, all columns must have the same number of rows
