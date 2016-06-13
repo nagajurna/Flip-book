@@ -8,7 +8,7 @@ var options = {container: 'container',
 			   height: 100,
 			   gutterX: 0,
 			   gutterY: 5,
-			   repeat: 'infinite',
+			   repeat: 50,
 			   speed: 100};	
 
 var flip = new Flip(options);
