@@ -1,3 +1,4 @@
+'use strict';
 function Flip(options)
 {
 	//CustomEvent() polyfill for ie
@@ -46,9 +47,9 @@ function Flip(options)
 		element = document.getElementById(container);
 		var c = element.children;//if already canvas, use it, else create one
 		var found = false;
-		for(i=0; i<c.length; i++)
+		for(var i=0; i<c.length; i++)
 		{
-			if(c[i].tagName=='CANVAS') { canvas = c[i];}
+			if(c[i].tagName==='CANVAS') { canvas = c[i];}
 			found=true;
 			break;
 		}
@@ -68,7 +69,7 @@ function Flip(options)
 	var imgs;
 	var initImage = function() {
 		imgs = [];
-		for(i=0; i<src.length; i++)
+		for(var i=0; i<src.length; i++)
 		{
 			img = new Image();
 			img.src = src[i];
@@ -395,7 +396,7 @@ function Flip(options)
 		panelsCounter += 1;
 		
 		
-		if(counter == loops)//end animation
+		if(counter === loops)//end animation
 		{
 			clearInterval(interval);
 			inprog = null;
@@ -414,11 +415,11 @@ function Flip(options)
 		}
 		
 
-		if(panelsCounter % cols == 0)//end row
+		if(panelsCounter % cols === 0)//end row
 		{
 			x = leftMargin;//first col
 	
-			if(cycleCounter == totalNumber)//end cycle
+			if(cycleCounter === totalNumber)//end cycle
 			{
 				y = topMargin;//first row
 				panelsCounter = 0;
@@ -429,7 +430,7 @@ function Flip(options)
 				
 			}
 			
-			if(panelsCounter == panelNumber)//end image
+			if(panelsCounter === panelNumber)//end image
 			{
 				y = topMargin;//first row
 				panelsCounter = 0;
@@ -475,7 +476,7 @@ function Flip(options)
 	}
 	
 	this.pause = function() {
-		if(inprog == true)
+		if(inprog === true)
 		{
 			clearInterval(interval);
 			inprog = false;
@@ -485,7 +486,7 @@ function Flip(options)
 	}
 	
 	this.resume = function() {
-		if(interval!=null && inprog === false)
+		if(interval !== null && inprog === false)
 		{
 			clearInterval(interval);
 			interval = setInterval(function(){moteur(interval);},speed);
@@ -496,7 +497,7 @@ function Flip(options)
 	}
 	
 	this.stop = function() {
-		if(interval!=null && inprog!=null)
+		if(interval !== null && inprog !== null)
 		{
 			refreshEvent();
 			clearInterval(interval);
